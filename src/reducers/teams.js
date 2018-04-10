@@ -1,7 +1,6 @@
 import { ADD_TEAM, SET_TEAM_NOTE } from "../actions/teams.js"
 
 export default function teams(state = [], action) {
-  console.log(state);
   if(action.type === ADD_TEAM) {
     return [
       ...state,

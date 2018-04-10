@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { setTeamNote } from "../actions/teams.js"
 
+import ReactTable from "react-table";
+import 'react-table/react-table.css'
+
+import { setTeamNote } from "../actions/teams.js"
 import api from "../services/vexdb.js"
 
 
@@ -10,6 +13,7 @@ class TeamContainer extends Component {
     super(props);
     this.state = {
       number: props.number,
+      stats: props.stats
     }
   }
 
@@ -18,16 +22,28 @@ class TeamContainer extends Component {
   componentDidMount() {
     api.getStats(this.state.number).then(
       (results) => {
-        console.log(results)
         this.props.dispatch(setTeamNote(this.state.number, { key: "stats", value: results }))
       }
     )
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    return {
+      number: nextProps.number,
+      stats: nextProps.stats
+    }
   }
 
   render() {
     return (
       <div>
         <h1>{ this.state.number }</h1>
+        { this.state.stats && (
+          <ReactTable data={ [this.state.stats] }
+                      columns={ Object.keys(this.state.stats).map(stat => ({Header: stat, accessor: stat})) }>
+          </ReactTable>
+        ) }
+
       </div>
     );
   }
