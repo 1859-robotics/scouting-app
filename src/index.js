@@ -9,6 +9,8 @@ import scoutingApp from './reducers'
 
 const store = createStore(scoutingApp)
 
+window.erots = store
+
 ReactDOM.render(
   <Provider store={ store }>
     <App />
