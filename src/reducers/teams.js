@@ -8,6 +8,7 @@ export default function teams(state = [], action) {
     ]
   } else if(action.type === SET_TEAM_NOTE) {
     if(state.find(team => team.number === action.number)) {
+      console.log("true")
       return [
         ...state,
         {
@@ -16,6 +17,7 @@ export default function teams(state = [], action) {
         }
       ]
     } else {
+      console.log("false")
       return [
         ...state,
         {

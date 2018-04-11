@@ -13,7 +13,8 @@ class TeamContainer extends Component {
     super(props);
     this.state = {
       number: props.number,
-      stats: props.stats
+      stats: props.stats,
+      matches: props.matches
     }
   }
 
@@ -25,12 +26,18 @@ class TeamContainer extends Component {
         this.props.dispatch(setTeamNote(this.state.number, { key: "stats", value: results }))
       }
     )
+    api.getMatches(this.state.number).then(
+      (results) => {
+        this.props.dispatch(setTeamNote(this.state.number, { key: "matches", value: results }))
+      }
+    )
   }
 
   static getDerivedStateFromProps(nextProps) {
     return {
       number: nextProps.number,
-      stats: nextProps.stats
+      stats: nextProps.stats,
+      matches: nextProps.matches
     }
   }
 
@@ -38,9 +45,9 @@ class TeamContainer extends Component {
     return (
       <div>
         <h1>{ this.state.number }</h1>
-        { this.state.stats && (
-          <ReactTable data={ [this.state.stats] }
-                      columns={ Object.keys(this.state.stats).map(stat => ({Header: stat, accessor: stat})) }>
+        { this.state.matches && (
+          <ReactTable data={ [this.state.matches] }
+                      columns={ Object.keys(this.state.matches).map(stat => ({Header: stat, accessor: stat})) }>
           </ReactTable>
         ) }
 
