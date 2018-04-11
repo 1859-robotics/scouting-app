@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import ReactTable from "react-table";
-import 'react-table/react-table.css'
-
 import { setTeamNote } from "../actions/teams.js"
 import api from "../services/vexdb.js"
 
+import DataTable from "../components/DataTable.js"
 
 class TeamContainer extends Component {
   constructor(props) {
@@ -14,11 +12,10 @@ class TeamContainer extends Component {
     this.state = {
       number: props.number,
       stats: props.stats,
-      matches: props.matches
+      matches: props.matches,
+      teamInfo: props.teamInfo
     }
   }
-
-
 
   componentDidMount() {
     api.getStats(this.state.number).then(
@@ -33,7 +30,6 @@ class TeamContainer extends Component {
     )
     api.getTeam(this.state.number).then(
       (results) => {
-        console.log(results)
         this.props.dispatch(setTeamNote(this.state.number, { key: "teamInfo", value: results }))
       }
     )
@@ -43,7 +39,9 @@ class TeamContainer extends Component {
     return {
       number: nextProps.number,
       stats: nextProps.stats,
-      matches: nextProps.matches
+      matches: nextProps.matches,
+      teamInfo: nextProps.teamInfo
+
     }
   }
 
@@ -51,11 +49,7 @@ class TeamContainer extends Component {
     return (
       <div>
         <h1>{ this.state.number }</h1>
-        { this.state.matches && (
-          <ReactTable data={ [this.state.matches] }
-                      columns={ Object.keys(this.state.matches).map(stat => ({Header: stat, accessor: stat})) }>
-          </ReactTable>
-        ) }
+        <DataTable data={ this.state.matches} />
 
       </div>
     );
