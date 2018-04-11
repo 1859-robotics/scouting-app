@@ -7,15 +7,15 @@ export default function teams(state = [], action) {
       ...action.payload.team
     ]
   } else if(action.type === SET_TEAM_NOTE) {
-    if(state.find(team => team.number === action.number)) {
+    if(state.find(team => team.number === action.payload.number)) {
       console.log("true")
-      return [
-        ...state,
-        {
-          ...state[action.payload.number],
-          [action.payload.key]: action.payload.value
-        }
-      ]
+      const prevState = state
+      const i = prevState.findIndex((team) => team.number === action.payload.number)
+      prevState[i] = {
+                      ...prevState[i],
+                       [action.payload.key]: action.payload.value
+                     }
+      return prevState
     } else {
       console.log("false")
       return [
