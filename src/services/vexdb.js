@@ -11,6 +11,9 @@ const api = {
   getStats: (team) => {
     return vexdb.getAll("rankings", {program: "VRC", season: "In The Zone", sku: settings.event, team})
   },
+  getTeam: (team) => {
+    return vexdb.getAll("teams", {program: "VRC", season: "In The Zone", sku: settings.event, team})
+  },
 }
 
 window.ipa = api
