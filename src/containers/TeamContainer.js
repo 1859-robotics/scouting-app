@@ -7,8 +7,8 @@ import api from "../services/vexdb.js"
 import DataTable from "../components/DataTable.js"
 
 class TeamContainer extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       number: props.number,
       stats: props.stats,
@@ -41,7 +41,6 @@ class TeamContainer extends Component {
       stats: nextProps.stats,
       matches: nextProps.matches,
       teamInfo: nextProps.teamInfo
-
     }
   }
 
@@ -49,7 +48,9 @@ class TeamContainer extends Component {
     return (
       <div>
         <h1>{ this.state.number }</h1>
-        <DataTable data={ this.state.matches} />
+        { this.state.matches &&
+          <DataTable data={ this.state.matches} />
+        }
 
       </div>
     );
@@ -57,7 +58,20 @@ class TeamContainer extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  if(state.teams.some((team) => team.number === ownProps.number)) {
+  if(state.teams.find((team) => team.number === ownProps.number)) {
+    return {
+      number: ownProps.number,
+      ...state.teams.find((team) => team.number === ownProps.number)
+    }
+  } else {
+    return {
+      number: ownProps.number
+    }
+  }
+}
+
+function mapStateToProps(state, ownProps) {
+  if(state.teams.find((team) => team.number === ownProps.number)) {
     return {
       number: ownProps.number,
       ...state.teams.find((team) => team.number === ownProps.number)

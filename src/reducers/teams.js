@@ -8,8 +8,7 @@ export default function teams(state = [], action) {
     ]
   } else if(action.type === SET_TEAM_NOTE) {
     if(state.find(team => team.number === action.payload.number)) {
-      console.log("true")
-      const prevState = state
+      const prevState = Array.from(state)
       const i = prevState.findIndex((team) => team.number === action.payload.number)
       prevState[i] = {
                       ...prevState[i],
@@ -17,7 +16,6 @@ export default function teams(state = [], action) {
                      }
       return prevState
     } else {
-      console.log("false")
       return [
         ...state,
         {
