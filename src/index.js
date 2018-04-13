@@ -7,6 +7,9 @@ import registerServiceWorker from './registerServiceWorker'
 
 import scoutingApp from './reducers'
 
+import "./style/style.css"
+// TODO: make an actual style system or something idk
+
 const store = createStore(scoutingApp)
 
 window.erots = store
