@@ -11,9 +11,9 @@ export default function teams(state = [], action) {
       const prevState = Array.from(state)
       const i = prevState.findIndex((team) => team.number === action.payload.number)
       prevState[i] = {
-                      ...prevState[i],
-                       [action.payload.key]: action.payload.value
-                     }
+        ...prevState[i],
+        [action.payload.key]: action.payload.value
+      }
       return prevState
     } else {
       return [

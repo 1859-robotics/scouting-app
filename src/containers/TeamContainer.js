@@ -8,9 +8,9 @@ import DataTable from "../components/DataTable.js"
 
 class TeamContainer extends Component {
   constructor(props, context) {
-    super(props, context);
+    super(props, context)
     this.state = {
-      number: props.number,
+      number: props.number || props.match.params.number,
       stats: props.stats,
       matches: props.matches,
       teamInfo: props.teamInfo
@@ -37,7 +37,7 @@ class TeamContainer extends Component {
 
   static getDerivedStateFromProps(nextProps) {
     return {
-      number: nextProps.number,
+      number: nextProps.number || nextProps.match.params.number,
       stats: nextProps.stats,
       matches: nextProps.matches,
       teamInfo: nextProps.teamInfo
@@ -54,19 +54,6 @@ class TeamContainer extends Component {
 
       </div>
     );
-  }
-}
-
-function mapStateToProps(state, ownProps) {
-  if(state.teams.find((team) => team.number === ownProps.number)) {
-    return {
-      number: ownProps.number,
-      ...state.teams.find((team) => team.number === ownProps.number)
-    }
-  } else {
-    return {
-      number: ownProps.number
-    }
   }
 }
 
