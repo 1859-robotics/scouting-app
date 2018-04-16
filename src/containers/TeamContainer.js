@@ -31,22 +31,38 @@ class TeamContainer extends Component {
   }
 
   static getDerivedStateFromProps(nextProps) {
-
     return {
       number: (nextProps.number || nextProps.match.params.number),
       stats: nextProps.stats,
       matches: nextProps.matches,
-      teamInfo: nextProps.teamInfo
+      teamInfo: nextProps.teamInfo,
+      userInputData: {
+        notes: "",
+        auton: {
+          works: false,
+          points: 0
+        }
+      }
     }
+  }
+
+  setNote(e) {
+    const state = { ...this.state }
+    state.userInputData.note = e.target.value
+    this.setState({ userInputData: state.userInputData })
+
   }
 
   render() {
     return (
       <div>
         <h1>{ this.state.number + " - " + (!this.state.teamInfo ? "" : this.state.teamInfo.team_name) }</h1>
-        { this.state.matches
 
-        }
+        <textarea placeholder="notes on team"
+                  value={ this.state.userInputData.note }
+                  onChange={ this.setNote.bind(this) }>
+
+        </textarea>
 
       </div>
     );

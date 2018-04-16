@@ -11,7 +11,14 @@ import scoutingApp from './reducers'
 import "./style/style.css"
 // TODO: make an actual style system or something idk
 
-const store = createStore(scoutingApp)
+const persist = JSON.parse(localStorage.getItem('state'));
+
+
+const store = createStore(scoutingApp, persist || {})
+
+store.subscribe(() => {
+  localStorage.setItem('state', JSON.stringify(store.getState()));
+})
 
 window.erots = store
 
