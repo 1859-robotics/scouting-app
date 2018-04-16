@@ -44,7 +44,7 @@ class TeamContainer extends Component {
 
     return (
       <div>
-        <h1>{ this.state.number }</h1>
+        <h1>{ this.state.number + " " + this.state}</h1>
         { this.state.matches
 
         }
