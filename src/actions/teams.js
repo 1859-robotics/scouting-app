@@ -11,3 +11,8 @@ export const setTeamNote = (number, data) => {
          }
   }
 }
+
+export const ADD_TEAMS = "ADD_TEAMS"
+export const addTeams = (teams) => {
+  return { type: ADD_TEAMS, payload: { teams } }
+}

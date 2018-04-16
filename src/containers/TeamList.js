@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import { setTeamNote } from "../actions/teams.js"
+import { addTeams } from "../actions/teams.js"
 import api from "../services/vexdb.js"
 
 import List from "../components/List.js"
@@ -13,36 +13,39 @@ class TeamList extends Component {
   }
 
   componentDidMount() {
-
+    api.getTeams().then(
+      (results) => {
+        this.props.dispatch(addTeams(results))
+      }
+    )
   }
 
   static getDerivedStateFromProps(nextProps) {
-
-    return null
+    return {
+      teams: nextProps.teams
+    }
   }
 
   render() {
     return (
       <div>
-        <List label="number"
-              list={ this.state.list }
-              linkURL={ "/app/teams/" } />
+        {this.state.teams ? (
+          <List label="number"
+                list={ this.state.teams }
+                linkURL={ "/app/teams/" } />
+        ) : (
+          <div>
+            <p>Getting Teams</p>
+          </div>
+        )}
       </div>
     );
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const number = (ownProps.number || ownProps.match.params.number)
-  if(state.teams.find((team) => team.number === number)) {
-    return {
-      number,
-      ...state.teams.find((team) => team.number === number)
-    }
-  } else {
-    return {
-      number
-    }
+  return {
+    teams: state.teams
   }
 }
 

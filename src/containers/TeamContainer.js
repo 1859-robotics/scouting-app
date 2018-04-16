@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import { setTeamNote } from "../actions/teams.js"
+import { setTeamNote, addTeam } from "../actions/teams.js"
 import api from "../services/vexdb.js"
 
 import DataTable from "../components/DataTable.js"

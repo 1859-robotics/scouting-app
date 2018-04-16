@@ -1,4 +1,4 @@
-import { ADD_TEAM, SET_TEAM_NOTE } from "../actions/teams.js"
+import { ADD_TEAM, SET_TEAM_NOTE, ADD_TEAMS } from "../actions/teams.js"
 
 export default function teams(state = [], action) {
   if(action.type === ADD_TEAM) {
@@ -8,13 +8,13 @@ export default function teams(state = [], action) {
     ]
   } else if(action.type === SET_TEAM_NOTE) {
     if(state.find(team => team.number === action.payload.number)) {
-      const prevState = Array.from(state)
-      const i = prevState.findIndex((team) => team.number === action.payload.number)
-      prevState[i] = {
-        ...prevState[i],
+      const newState = Array.from(state)
+      const i = newState.findIndex((team) => team.number === action.payload.number)
+      newState[i] = {
+        ...newState[i],
         [action.payload.key]: action.payload.value
       }
-      return prevState
+      return newState
     } else {
       return [
         ...state,
@@ -24,6 +24,14 @@ export default function teams(state = [], action) {
         }
       ]
     }
+
+  } else if(action.type === ADD_TEAMS) {
+    if(state.length !== 0) {
+      return [
+        ...state,
+        ...action.payload.teams.filter(team => state.find(ateam => team.number !== ateam.number))
+      ]
+    } else return [ ...action.payload.teams ]
 
   } else return state
 }

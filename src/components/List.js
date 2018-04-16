@@ -6,10 +6,14 @@ import SearchBar from "./SearchBar"
 export default class List extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      filteredList: props.list,
-    }
+    this.state = {}
 
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      filteredList: nextProps.list,
+    }
   }
 
   render() {
