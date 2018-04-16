@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import { addTeams } from "../actions/teams.js"
+import { addTeams, setTeam } from "../actions/teams.js"
 import api from "../services/vexdb.js"
 
 import List from "../components/List.js"
@@ -15,7 +15,7 @@ class TeamList extends Component {
   componentDidMount() {
     api.getTeams().then(
       (results) => {
-        this.props.dispatch(addTeams(results))
+        this.props.dispatch(addTeams(results.map(team => ({ number: team.number, teamInfo: team }))))
       }
     )
   }
@@ -24,6 +24,13 @@ class TeamList extends Component {
     return {
       teams: nextProps.teams
     }
+  }
+
+  addNewTeam(e) {
+    this.props.dispatch(setTeam({
+      number: this.newTeamInput.value
+    }))
+
   }
 
   render() {
@@ -35,9 +42,12 @@ class TeamList extends Component {
                 linkURL={ "/app/teams/" } />
         ) : (
           <div>
-            <p>Getting Teams</p>
+            <p>Getting Teams...</p>
           </div>
         )}
+        <button onClick={ this.addNewTeam.bind(this) }>add team</button>
+        <input type="text"
+               ref={ newTeamInput => this.newTeamInput = newTeamInput}/>
       </div>
     );
   }

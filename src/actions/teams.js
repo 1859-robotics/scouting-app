@@ -16,3 +16,8 @@ export const ADD_TEAMS = "ADD_TEAMS"
 export const addTeams = (teams) => {
   return { type: ADD_TEAMS, payload: { teams } }
 }
+
+export const SET_TEAM = "SET_TEAM"
+export const setTeam = (team) => {
+  return { type: SET_TEAM, payload: { team } }
+}

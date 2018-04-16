@@ -8,10 +8,16 @@ import registerServiceWorker from './registerServiceWorker'
 
 import scoutingApp from './reducers'
 
-import "./style/style.css"
 // TODO: make an actual style system or something idk
+import "./style/style.css"
 
-const persist = JSON.parse(localStorage.getItem('state'));
+
+let persist = {}
+try {
+  persist = JSON.parse(localStorage.getItem('state'));
+} catch(e) {
+  // TODO: maybe add error handling here but idk
+}
 
 
 const store = createStore(scoutingApp, persist || {})

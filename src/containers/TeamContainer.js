@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import { setTeamNote, addTeam } from "../actions/teams.js"
+import { setTeamNote, addTeam, setTeam } from "../actions/teams.js"
 import api from "../services/vexdb.js"
 
 import DataTable from "../components/DataTable.js"
@@ -33,15 +33,16 @@ class TeamContainer extends Component {
   static getDerivedStateFromProps(nextProps) {
     return {
       number: (nextProps.number || nextProps.match.params.number),
-      stats: nextProps.stats,
-      matches: nextProps.matches,
-      teamInfo: nextProps.teamInfo,
+      stats: nextProps.stats || {},
+      matches: nextProps.matches || {},
+      teamInfo: nextProps.teamInfo || {},
       userInputData: {
         notes: "",
         auton: {
           works: false,
           points: 0
-        }
+        },
+        ...nextProps.userInputData
       }
     }
   }
@@ -50,7 +51,11 @@ class TeamContainer extends Component {
     const state = { ...this.state }
     state.userInputData.note = e.target.value
     this.setState({ userInputData: state.userInputData })
+  }
 
+  componentWillUnmount() {
+    this.props.dispatch(setTeam(this.state))
+    alert("hi")
   }
 
   render() {
