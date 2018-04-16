@@ -28,7 +28,7 @@ class TeamList extends Component {
 
   addNewTeam(e) {
     this.props.dispatch(setTeam({
-      number: this.newTeamInput.value
+      number: this.newTeamInput.value.toUpperCase()
     }))
 
   }

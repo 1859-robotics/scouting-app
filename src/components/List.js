@@ -16,6 +16,13 @@ export default class List extends Component {
     }
   }
 
+  filterList(e) {
+    let filteredList = this.props.list.filter((item) => {
+      return item.number.indexOf(e.target.value) !== -1
+    });
+    this.setState({ filteredList })
+  }
+
   render() {
     const listItems = this.state.filteredList.map((item, i) => (
       <li key={ i }>
@@ -24,7 +31,7 @@ export default class List extends Component {
     ))
     return (
       <div>
-        <SearchBar />
+        <SearchBar onChange={ this.filterList.bind(this) }/>
         <ul>
           { listItems }
         </ul>
