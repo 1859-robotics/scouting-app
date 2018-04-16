@@ -41,11 +41,12 @@ class TeamContainer extends Component {
   }
 
   render() {
+
     return (
       <div>
         <h1>{ this.state.number }</h1>
-        { this.state.matches &&
-          <DataTable data={ this.state.matches} />
+        { this.state.matches
+
         }
 
       </div>

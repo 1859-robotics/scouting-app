@@ -38,6 +38,9 @@ class TeamList extends Component {
             <p>Getting Teams</p>
           </div>
         )}
+        <button onClick={ () => {  } }>
+          Add new Team
+        </button>
       </div>
     );
   }
