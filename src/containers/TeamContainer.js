@@ -43,9 +43,9 @@ class TeamContainer extends Component {
   render() {
     return (
       <div>
-        <h1>{ this.state.number + " - " + this.state }</h1>
+        <h1>{ this.state.number + " - " + (!this.state.teamInfo ? "" : this.state.teamInfo.team_name) }</h1>
         { this.state.matches
-          
+
         }
 
       </div>

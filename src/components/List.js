@@ -17,8 +17,8 @@ export default class List extends Component {
   }
 
   render() {
-    const listItems = this.state.filteredList.map((item) => (
-      <li>
+    const listItems = this.state.filteredList.map((item, i) => (
+      <li key={ i }>
         <Link to={ this.props.linkURL + item[this.props.label] }>{ item[this.props.label] }</Link>
       </li>
     ))
