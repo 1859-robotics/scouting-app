@@ -30,7 +30,8 @@ class MatchList extends Component {
     return (
       <div>
         {this.state.matches ? (
-          <List label="matchnum"
+          <List label={["division", "matchnum"]}
+                link="matchnum"
                 list={ this.state.matches }
                 linkURL={ "/app/matches/" } />
         ) : (

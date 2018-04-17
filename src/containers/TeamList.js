@@ -37,7 +37,8 @@ class TeamList extends Component {
     return (
       <div>
         {this.state.teams ? (
-          <List label="number"
+          <List label={["number"]}
+                link="number"
                 list={ this.state.teams }
                 linkURL={ "/app/teams/" } />
         ) : (

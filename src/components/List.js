@@ -18,17 +18,29 @@ export default class List extends Component {
 
   filterList(e) {
     let filteredList = this.props.list.filter((item) => {
-      return item.number.indexOf(e.target.value) !== -1
+      return item[this.props.label].indexOf(e.target.value) !== -1
     });
     this.setState({ filteredList })
   }
 
   render() {
-    const listItems = this.state.filteredList.map((item, i) => (
-      <li key={ i }>
-        <Link to={ this.props.linkURL + item[this.props.label] }>{ item[this.props.label] }</Link>
-      </li>
-    ))
+    const listItems = this.state.filteredList.map((item, i) => {
+      const labels = this.props.label.map((label, j) => (
+        <span key={ j }
+              style={{ width: "200px" }}>
+          { item[label] }
+        </span>
+      ))
+
+      return (
+        <li key={ i }>
+          <Link to={ this.props.linkURL + item[this.props.link] }
+                style={{ display: "flex" }}>
+            { labels }
+          </Link>
+        </li>
+      )
+    })
     return (
       <div>
         <SearchBar onChange={ this.filterList.bind(this) }/>
