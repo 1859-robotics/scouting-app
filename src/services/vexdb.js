@@ -3,7 +3,7 @@ import vexdb from "vexdb"
 window.bdxev = require("vexdb");
 
 const settings = {
-  sku: "RE-VRC-17-4284", // TODO: make this user controllable
+  sku: "RE-VRC-17-2914", // TODO: make this user controllable
   season: "In The Zone",
   program: "VRC",
 }

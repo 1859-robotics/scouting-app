@@ -38,24 +38,23 @@ class TeamContainer extends Component {
       teamInfo: nextProps.teamInfo || {},
       userInputData: {
         notes: "",
-        auton: {
-          works: false,
-          points: 0
-        },
+        autonWorks: true,
+        autonPoints: 0,
         ...nextProps.userInputData
       }
     }
   }
 
   setNote(e) {
-    const state = { ...this.state }
-    state.userInputData.note = e.target.value
-    this.setState({ userInputData: state.userInputData })
   }
 
-  componentWillUnmount() {
+  setData(e) {
+    const state = { ...this.state }
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
+    console.log(value);
+    state.userInputData[e.target.name] = value
+    this.setState({ userInputData: state.userInputData })
     this.props.dispatch(setTeam(this.state))
-    alert("hi")
   }
 
   render() {
@@ -65,9 +64,21 @@ class TeamContainer extends Component {
 
         <textarea placeholder="notes on team"
                   value={ this.state.userInputData.note }
-                  onChange={ this.setNote.bind(this) }>
-
+                  name="note"
+                  onChange={ this.setData.bind(this) }>
         </textarea>
+        <div>
+          <p>Auton: </p>
+          <input type="number"
+                 name="autonPoints"
+                 value={ this.state.userInputData.autonPoints }
+                 onChange={ this.setData.bind(this) }/>
+          <input type="checkbox"
+                 name="autonWorks"
+                 checked={ this.state.userInputData.autonWorks }
+                 onChange={ this.setData.bind(this) }/>
+
+        </div>
 
       </div>
     );
