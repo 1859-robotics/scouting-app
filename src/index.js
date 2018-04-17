@@ -16,7 +16,8 @@ let persist = {}
 try {
   persist = JSON.parse(localStorage.getItem('state'));
 } catch(e) {
-  // TODO: maybe add error handling here but idk
+  // TODO: maybe add error handling here
+  // TODO: stop using idk so much, people hate you alex
 }
 
 

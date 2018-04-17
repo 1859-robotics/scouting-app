@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import teams from "./teams.js"
+import matches from "./matches.js"
 
-// console.log(reducers)
 
-const scoutingApp = combineReducers({teams})
+const scoutingApp = combineReducers({teams, matches})
 export default scoutingApp
