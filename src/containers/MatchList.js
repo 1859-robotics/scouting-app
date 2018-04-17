@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import { addMatches, setMaches } from "../actions/matches.js"
+import { addMatches, setMatch } from "../actions/matches.js"
 import api from "../services/vexdb.js"
 
 import List from "../components/List.js"
@@ -13,7 +13,7 @@ class MatchList extends Component {
   }
 
   componentDidMount() {
-    api.getTeams().then(
+    api.getMatches().then(
       (results) => {
         this.props.dispatch(addMatches(results))
       }
@@ -26,16 +26,10 @@ class MatchList extends Component {
     }
   }
 
-  addNewTeam(e) {
-    this.props.dispatch(setTeam({
-      number: this.newTeamInput.value.toUpperCase()
-    }))
-  }
-
   render() {
     return (
       <div>
-        {this.state.teams ? (
+        {this.state.matches ? (
           <List label="matchnum"
                 list={ this.state.matches }
                 linkURL={ "/app/matches/" } />
@@ -44,15 +38,13 @@ class MatchList extends Component {
             <p>Getting Maches...</p>
           </div>
         )}
-        <button onClick={ this.addNewTeam.bind(this) }>add team</button>
-        <input type="text"
-               ref={ newTeamInput => this.newTeamInput = newTeamInput}/>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
+  console.log(state);
   return {
     matches: state.matches
   }
