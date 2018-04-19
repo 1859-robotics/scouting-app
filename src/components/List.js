@@ -27,7 +27,7 @@ export default class List extends Component {
     const listItems = this.state.filteredList.map((item, i) => {
       const labels = this.props.label.map((label, j) => (
         <span key={ j }
-              style={{ width: "200px" }}>
+              style={{ width: "100px" }}>
           { item[label] }
         </span>
       ))
@@ -41,10 +41,17 @@ export default class List extends Component {
         </li>
       )
     })
+    const headLabels = this.props.label.map((label, i) => (
+      <span key={ i }
+            style={{ width: "100px", display: "inline-block" }}>
+        { label }
+      </span>
+    ))
     return (
       <div>
         <SearchBar onChange={ this.filterList.bind(this) }/>
         <ul>
+          <li>{ headLabels }</li>
           { listItems }
         </ul>
       </div>

@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+
 import { connect } from 'react-redux'
 
 import { setTeamNote, addTeam, setTeam } from "../actions/teams.js"
@@ -60,6 +62,7 @@ class TeamContainer extends Component {
   render() {
     return (
       <div>
+        <Link to="/app/teams/">{ "<" } Teams</Link>
         <h1>{ this.state.number + " - " + (!this.state.teamInfo ? "" : this.state.teamInfo.team_name) }</h1>
 
         <textarea placeholder="notes on team"
@@ -83,7 +86,7 @@ class TeamContainer extends Component {
           <div>
             <h2>Matches</h2>
 
-            <List label={["division", "matchnum"]}
+            <List label={["division", "matchnum", "blue1", "blue2", "blue3", "red1", "red2", "red3"]}
               link="matchnum"
               list={ this.state.matches }
               linkURL={ "/app/matches/" } />
@@ -92,7 +95,7 @@ class TeamContainer extends Component {
         { this.state.stats && (
           <div>
             <h2>Current Standings</h2>
-            
+            <DataTable data={ this.state.stats }/>
           </div>
         ) }
       </div>
