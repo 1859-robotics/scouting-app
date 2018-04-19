@@ -32,7 +32,7 @@ class MatchList extends Component {
         {this.state.matches ? (
           <List label={["division", "matchnum"]}
                 link="matchnum"
-                list={ this.state.matches }
+                search={ ["matchnum", "blue1", "blue2", "blue3", "red1", "red2", "red3"] }                list={ this.state.matches }
                 linkURL={ "/app/matches/" } />
         ) : (
           <div>

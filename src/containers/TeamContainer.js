@@ -90,6 +90,7 @@ class TeamContainer extends Component {
 
             <List label={["division", "matchnum", "blue1", "blue2", "blue3", "red1", "red2", "red3"]}
               link="matchnum"
+              search={ ["matchnum", "blue1", "blue2", "blue3", "red1", "red2", "red3"] }
               list={ this.state.matches }
               linkURL={ "/app/matches/" } />
             </div>
