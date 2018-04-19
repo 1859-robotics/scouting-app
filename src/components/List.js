@@ -18,7 +18,12 @@ export default class List extends Component {
 
   filterList(e) {
     let filteredList = this.props.list.filter((item) => {
-      return item[this.props.link].indexOf(e.target.value) !== -1
+      let found = false
+      for(let i = 0; i < this.props.search.length; i++) {
+        if(item[this.props.search[i]].toString().length !== 0 &&
+           item[this.props.search[i]].toString().toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1) found = true
+      }
+      return found
     });
     this.setState({ filteredList })
   }
@@ -49,9 +54,11 @@ export default class List extends Component {
     ))
     return (
       <div>
-        <SearchBar onChange={ this.filterList.bind(this) }/>
+        <SearchBar onChange={ (e) => this.filterList(e) }/>
         <ul>
-          <li>{ headLabels }</li>
+          <li style={{ display: "inline-flex" }}>
+            { headLabels }
+          </li>
           { listItems }
         </ul>
       </div>
