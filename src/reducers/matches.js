@@ -33,10 +33,6 @@ export default function matches(state = [], action) {
     } else return [ ...action.payload.matches ]
 
   } else if(action.type === SET_MATCH) {
-    console.log(action.payload);
-    console.log([
-      action.payload.match
-    ]);
     if(state.find(match => action.payload.match.matchnum === match.matchnum)) {
       const newState = Array.from(state)
       const i = newState.findIndex((match) => match.matchnum === action.payload.match.matchnum)

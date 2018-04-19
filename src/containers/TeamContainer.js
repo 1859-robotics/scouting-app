@@ -40,7 +40,7 @@ class TeamContainer extends Component {
       matches: nextProps.matches || [],
       teamInfo: nextProps.teamInfo || {},
       userInputData: {
-        notes: "",
+        note: "",
         autonWorks: true,
         autonPoints: 0,
         ...nextProps.userInputData
@@ -48,15 +48,16 @@ class TeamContainer extends Component {
     }
   }
 
-  setNote(e) {
-  }
-
   setData(e) {
     const state = { ...this.state }
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
     state.userInputData[e.target.name] = value
     this.setState({ userInputData: state.userInputData })
+  }
+
+  saveData(e) {
     this.props.dispatch(setTeam(this.state))
+
   }
 
   render() {
@@ -64,23 +65,24 @@ class TeamContainer extends Component {
       <div>
         <Link to="/app/teams/">{ "<" } Teams</Link>
         <h1>{ this.state.number + " - " + (!this.state.teamInfo ? "" : this.state.teamInfo.team_name) }</h1>
-
-        <textarea placeholder="notes on team"
-                  value={ this.state.userInputData.note }
-                  name="note"
-                  onChange={ this.setData.bind(this) }>
-        </textarea>
         <div>
-          <p>Auton: </p>
-          <input type="number"
-                 name="autonPoints"
-                 value={ this.state.userInputData.autonPoints }
-                 onChange={ this.setData.bind(this) }/>
-          <input type="checkbox"
-                 name="autonWorks"
-                 checked={ this.state.userInputData.autonWorks }
-                 onChange={ this.setData.bind(this) }/>
-
+          <textarea placeholder="notes on team"
+            value={ this.state.userInputData.note }
+            name="note"
+            onChange={ this.setData.bind(this) }>
+          </textarea>
+          <div>
+            <p>Auton: </p>
+            <input type="number"
+              name="autonPoints"
+              value={ this.state.userInputData.autonPoints }
+              onChange={ this.setData.bind(this) }/>
+              <input type="checkbox"
+                name="autonWorks"
+                checked={ this.state.userInputData.autonWorks }
+                onChange={ this.setData.bind(this) }/>
+          </div>
+          <button onClick={ this.saveData.bind(this) }>Save Data</button>
         </div>
         { this.state.matches && (
           <div>
@@ -98,6 +100,7 @@ class TeamContainer extends Component {
             <DataTable data={ this.state.stats }/>
           </div>
         ) }
+
       </div>
     );
   }

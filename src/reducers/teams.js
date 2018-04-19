@@ -34,10 +34,6 @@ export default function teams(state = [], action) {
     } else return [ ...action.payload.teams ]
 
   } else if(action.type === SET_TEAM) {
-    console.log(action.payload);
-    console.log([
-      action.payload.team
-    ]);
     if(state.find(team => action.payload.team.number === team.number)) {
       const newState = Array.from(state)
       const i = newState.findIndex((team) => team.number === action.payload.team.number)
@@ -46,7 +42,6 @@ export default function teams(state = [], action) {
       }
       return newState
     } else {
-      console.log("else");
       return [
         ...state,
         action.payload.team
