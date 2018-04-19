@@ -18,7 +18,7 @@ export default class List extends Component {
 
   filterList(e) {
     let filteredList = this.props.list.filter((item) => {
-      return item[this.props.label].indexOf(e.target.value) !== -1
+      return item[this.props.link].indexOf(e.target.value) !== -1
     });
     this.setState({ filteredList })
   }

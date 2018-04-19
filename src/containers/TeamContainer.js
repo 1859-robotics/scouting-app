@@ -5,6 +5,7 @@ import { setTeamNote, addTeam, setTeam } from "../actions/teams.js"
 import api from "../services/vexdb.js"
 
 import DataTable from "../components/DataTable.js"
+import List from "../components/List.js"
 
 class TeamContainer extends Component {
   constructor(props, context) {
@@ -34,7 +35,7 @@ class TeamContainer extends Component {
     return {
       number: (nextProps.number || nextProps.match.params.number),
       stats: nextProps.stats || {},
-      matches: nextProps.matches || {},
+      matches: nextProps.matches || [],
       teamInfo: nextProps.teamInfo || {},
       userInputData: {
         notes: "",
@@ -51,7 +52,6 @@ class TeamContainer extends Component {
   setData(e) {
     const state = { ...this.state }
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
-    console.log(value);
     state.userInputData[e.target.name] = value
     this.setState({ userInputData: state.userInputData })
     this.props.dispatch(setTeam(this.state))
@@ -79,7 +79,22 @@ class TeamContainer extends Component {
                  onChange={ this.setData.bind(this) }/>
 
         </div>
+        { this.state.matches && (
+          <div>
+            <h2>Matches</h2>
 
+            <List label={["division", "matchnum"]}
+              link="matchnum"
+              list={ this.state.matches }
+              linkURL={ "/app/matches/" } />
+            </div>
+        ) }
+        { this.state.stats && (
+          <div>
+            <h2>Current Standings</h2>
+            
+          </div>
+        ) }
       </div>
     );
   }
