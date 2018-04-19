@@ -24,7 +24,7 @@ export default class List extends Component {
            item[this.props.search[i]].toString().toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1) found = true
       }
       return found
-    });
+    }, this);
     this.setState({ filteredList })
   }
 

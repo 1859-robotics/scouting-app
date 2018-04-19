@@ -14,7 +14,7 @@ export default class App extends Component {
           <Route exact path="/app/teams/:number/" component={ TeamContainer }/>
           <Route exact path="/app/teams/" component={ TeamList }/>
           <Route exact path="/app/matches/" component={ MatchList }/>
-          <Route exact path="/app/matches/:division/:matchnum/" component={ MatchContainer }/>
+          <Route exact path="/app/matches/:division/:matchnum/:round" component={ MatchContainer }/>
 
           <Redirect to="/app/teams/"/>
         </Switch>
