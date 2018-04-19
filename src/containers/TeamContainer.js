@@ -84,18 +84,18 @@ class TeamContainer extends Component {
           </div>
           <button onClick={ this.saveData.bind(this) }>Save Data</button>
         </div>
-        { this.state.matches && (
+        { !!this.state.matches.length && (
           <div>
             <h2>Matches</h2>
 
             <List label={["division", "matchnum", "blue1", "blue2", "blue3", "red1", "red2", "red3"]}
-              link="matchnum"
-              search={ ["blue1", "blue2", "blue3", "red1", "red2", "red3"] }
+              link={["division", "matchnum"]}
+              search={ ["division", "blue1", "blue2", "blue3", "red1", "red2", "red3"] }
               list={ this.state.matches }
               linkURL={ "/app/matches/" } />
             </div>
         ) }
-        { this.state.stats && (
+        { !!Object.keys(this.state.stats).length && (
           <div>
             <h2>Current Standings</h2>
             <DataTable data={ this.state.stats }/>

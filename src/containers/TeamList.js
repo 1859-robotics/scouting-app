@@ -38,7 +38,8 @@ class TeamList extends Component {
       <div>
         {this.state.teams ? (
           <List label={["number"]}
-                link="number"
+                link={["number"]}
+                search={["number"]}
                 list={ this.state.teams }
                 linkURL={ "/app/teams/" } />
         ) : (

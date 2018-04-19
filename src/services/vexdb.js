@@ -12,6 +12,9 @@ const api = {
   getMatches: (team) => {
     return vexdb.get("matches", { ...settings, team })
   },
+  getMatch: (data) => {
+    return vexdb.get("matches", { ...settings, ...data })
+  },
   getStats: (team) => {
     return vexdb.get("rankings", { ...settings, team })
   },

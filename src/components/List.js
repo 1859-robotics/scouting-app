@@ -36,10 +36,10 @@ export default class List extends Component {
           { item[label] }
         </span>
       ))
-
+      const url = this.props.linkURL + this.props.link.reduce((acc, cur) => acc + "/" + item[cur], "")
       return (
         <li key={ i }>
-          <Link to={ this.props.linkURL + item[this.props.link] }
+          <Link to={ url }
                 style={{ display: "flex" }}>
             { labels }
           </Link>
