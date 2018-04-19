@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { addTeams, setTeam } from "../actions/teams.js"
@@ -36,6 +37,7 @@ class TeamList extends Component {
   render() {
     return (
       <div>
+      <Link to="/app/matches/">{ "<" } Matches</Link>
         {this.state.teams ? (
           <List label={["number"]}
                 link={["number"]}

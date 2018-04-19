@@ -3,110 +3,73 @@ import { Link } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 
-import { setTeamNote, addTeam, setTeam } from "../actions/teams.js"
 import api from "../services/vexdb.js"
 
 import DataTable from "../components/DataTable.js"
+import TeamContainer from "./TeamContainer.js"
 import List from "../components/List.js"
 
-class TeamContainer extends Component {
+const getTeams = (m) => {
+  return [ m.red1, m.red2, m.blue1, m.blue2, (m.blue3 && m.blue3), (m.red3 && m.red3) ]
+}
+
+class MatchContainer extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = {}
   }
 
   componentDidMount() {
-    api.getMatches({division: this.state.division, matchnum: this.state.matchnum}).then(
+    // const teams = getTeams(this.state.match)
+    api.getTeams({division: this.state.division, matchnum: this.state.matchnum}).then(
       (results) => {
-        this.props.dispatch(setTeamNote(this.state.number, { key: "matches", value: results }))
+
+        this.setstate({teams})
       }
     )
   }
 
-  static getDerivedStateFromProps(nextProps) {
+  static getDerivedStateFromProps(nextProps, prevState) {
     return {
-      number: (nextProps.number || nextProps.match.params.number),
-      stats: nextProps.stats || {},
-      matches: nextProps.matches || [],
-      teamInfo: nextProps.teamInfo || {},
-      userInputData: {
-        note: "",
-        autonWorks: true,
-        autonPoints: 0,
-        ...nextProps.userInputData
-      }
+      match: nextProps.matchData || {},
+      division: nextProps.division,
+      matchnum: nextProps.matchnum,
+      teams: prevState.teams || []
     }
   }
 
-  setData(e) {
-    const state = { ...this.state }
-    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
-    state.userInputData[e.target.name] = value
-    this.setState({ userInputData: state.userInputData })
-  }
-
-  saveData(e) {
-    this.props.dispatch(setTeam(this.state))
-
-  }
-
   render() {
+
+    const teamContainers = this.state.teams.map((team, i) => (
+      <TeamContainer number={ team.number }  key={ i }/>
+    ))
+
     return (
       <div>
-        <Link to="/app/teams/">{ "<" } Teams</Link>
-        <h1>{ this.state.number + " - " + (!this.state.teamInfo ? "" : this.state.teamInfo.team_name) }</h1>
+        <Link to="/app/matches/">{ "<" } Matches</Link>
+        <h1>{ this.state.division + " - " + this.state.matchnum }</h1>
         <div>
-          <textarea placeholder="notes on team"
-            value={ this.state.userInputData.note }
-            name="note"
-            onChange={ this.setData.bind(this) }>
-          </textarea>
-          <div>
-            <p>Auton: </p>
-            <input type="number"
-              name="autonPoints"
-              value={ this.state.userInputData.autonPoints }
-              onChange={ this.setData.bind(this) }/>
-              <input type="checkbox"
-                name="autonWorks"
-                checked={ this.state.userInputData.autonWorks }
-                onChange={ this.setData.bind(this) }/>
-          </div>
-          <button onClick={ this.saveData.bind(this) }>Save Data</button>
+          { this.state.teams && teamContainers }
         </div>
-        { !!this.state.matches.length && (
-          <div>
-            <h2>Matches</h2>
-
-            <List label={["division", "matchnum", "blue1", "blue2", "blue3", "red1", "red2", "red3"]}
-              link={["division", "matchnum"]}
-              search={ ["division", "blue1", "blue2", "blue3", "red1", "red2", "red3"] }
-              list={ this.state.matches }
-              linkURL={ "/app/matches/" } />
-            </div>
-        ) }
-        { !!Object.keys(this.state.stats).length && (
-          <div>
-            <h2>Current Standings</h2>
-            <DataTable data={ this.state.stats }/>
-          </div>
-        ) }
-
       </div>
     );
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const number = (ownProps.number || ownProps.match.params.number)
-  if(state.teams.find((team) => team.number === number)) {
+  const division = ownProps.match.params.division
+  const matchnum = ownProps.match.params.matchnum
+
+  if(state.matches.find((team) => team.division === division && team.matchnum === matchnum)) {
     return {
-      number,
-      ...state.teams.find((team) => team.number === number)
+      division,
+      matchnum,
+      matchData: state.matches.find((team) => team.division === division && team.matchnum === matchnum)
     }
   } else {
     return {
-      number
+      division,
+      matchnum,
     }
   }
 }

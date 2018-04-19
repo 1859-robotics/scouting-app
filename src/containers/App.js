@@ -4,7 +4,7 @@ import { Switch, Route, Redirect } from "react-router-dom"
 import TeamList from "./TeamList.js"
 import MatchList from "./MatchList.js"
 import TeamContainer from "./TeamContainer.js"
-import MatchContainer from ".MatchContainer.js"
+import MatchContainer from "./MatchContainer.js"
 
 export default class App extends Component {
   render() {

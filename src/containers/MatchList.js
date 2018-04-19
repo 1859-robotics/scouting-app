@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { addMatches, setMatch } from "../actions/matches.js"
@@ -29,6 +30,7 @@ class MatchList extends Component {
   render() {
     return (
       <div>
+      <Link to="/app/teams/">{ "<" } Teams</Link>
         {this.state.matches ? (
           <List label={["division", "matchnum", "blue1", "blue2", "blue3", "red1", "red2", "red3"]}
                 link={["division", "matchnum"]}
