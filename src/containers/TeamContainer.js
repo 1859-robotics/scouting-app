@@ -21,7 +21,7 @@ class TeamContainer extends Component {
         this.props.dispatch(setTeamNote(this.state.number, { key: "stats", value: results }))
       }
     )
-    api.getMatches(this.state.number).then(
+    api.getMatches({team: this.state.number}).then(
       (results) => {
         this.props.dispatch(setTeamNote(this.state.number, { key: "matches", value: results }))
       }

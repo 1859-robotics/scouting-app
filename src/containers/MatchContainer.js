@@ -12,8 +12,11 @@ import List from "../components/List.js"
 
 const getTeams = (m) => {
   console.log(m);
-  const result = [m.red1, m.red2, m.blue1, m.blue2]
-
+  const result = []
+  m.blue1 && result.push(m.blue1)
+  m.red1  && result.push(m.red1)
+  m.blue2 && result.push(m.blue2)
+  m.red2  && result.push(m.red2)
   m.blue3 && result.push(m.blue3)
   m.red3  && result.push(m.red3)
 
@@ -28,7 +31,7 @@ class MatchContainer extends Component {
 
   componentDidMount() {
     console.log(this.state);
-    api.getMatches({division: this.state.division, matchnum: this.state.matchnum, round: this.state.round}).then(
+    api.getMatches({division: this.state.division, matchnum: this.state.matchnum}).then(
       (results) => {
         this.props.dispatch(setMatch(results))
         this.setState({ teams: getTeams(results) })
