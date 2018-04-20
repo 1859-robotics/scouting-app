@@ -6,6 +6,7 @@ const settings = {
   sku: "RE-VRC-17-3805", // TODO: make this user controllable
   season: "In The Zone",
   program: "VRC",
+  division: "Technology",
 }
 
 const api = {
@@ -23,6 +24,13 @@ const api = {
   },
   getTeams: () => {
     return vexdb.get("teams", { ...settings })
+  }
+  getDivisionTeams: (team) => {
+    return new Promise((resolve, reject) => {
+      vexdb.get("teams", { team }).then((result) => {
+        api.getMatch({ team: result.number })
+      })
+    });
   }
 }
 
