@@ -10,7 +10,7 @@
     "react-scripts": "1.1.4",
     "react-table": "^6.8.0",
     "redux": "^3.7.2",
-    "vexdb": "^0.5.21"
+    "vexdb": "^0.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
