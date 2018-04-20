@@ -89,7 +89,7 @@ class TeamContainer extends Component {
             <h2>Matches</h2>
 
             <List label={["division", "matchnum", "blue1", "blue2", "blue3", "red1", "red2", "red3"]}
-              link={["division", "matchnum"]}
+              link={["division", "matchnum", "round"]}
               search={ ["division", "blue1", "blue2", "blue3", "red1", "red2", "red3"] }
               list={ this.state.matches }
               linkURL={ "/app/matches/" } />

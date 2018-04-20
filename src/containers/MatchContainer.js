@@ -30,8 +30,7 @@ class MatchContainer extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state);
-    api.getMatches({division: this.state.division, matchnum: this.state.matchnum}).then(
+    api.getMatches({division: this.state.division, matchnum: this.state.matchnum, round: this.state.round}).then(
       (results) => {
         this.props.dispatch(setMatch(results))
         this.setState({ teams: getTeams(results) })
@@ -59,7 +58,10 @@ class MatchContainer extends Component {
 
     const teamContainers = this.state.teams.map((team, i) => {
       return (
-        <TeamContainer number={ team.number }  key={ i }/>
+        <div style={{ marginBottom: "64px", borderBottom: "1px solid" }}>
+
+          <TeamContainer number={ team }  key={ i }/>
+        </div>
       )
     })
 
