@@ -10,11 +10,8 @@ const settings = {
 }
 
 const api = {
-  getMatches: (api) => {
-    return vexdb.get("matches", { ...settings, ...api })
-  },
-  getMatch: (data) => {
-    return vexdb.get("matches", { ...settings, ...data })
+  getMatches: (options) => {
+    return vexdb.get("matches", { ...settings, ...options })
   },
   getStats: (team) => {
     return vexdb.get("rankings", { ...settings, team })
@@ -24,11 +21,14 @@ const api = {
   },
   getTeams: () => {
     return vexdb.get("teams", { ...settings })
-  }
-  getDivisionTeams: (team) => {
+  },
+  getTeamDivisions: (team, options = {}) => {
     return new Promise((resolve, reject) => {
-      vexdb.get("teams", { team }).then((result) => {
-        api.getMatch({ team: result.number })
+      api.getMatches({ team, ...options }).then((matches) => {
+        let divisions = matches.reduce((acc, cur, i) => (
+          acc.indexOf(cur.division) === -1 ? [...acc, cur.division] : acc
+        ), [])
+        resolve(divisions.length === 1 ? divisions[0] : divisions)
       })
     });
   }
