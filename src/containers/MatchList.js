@@ -14,7 +14,7 @@ class MatchList extends Component {
   }
 
   componentDidMount() {
-    api.getMatches().then(
+    api.getMatches({ division: "Technology" }).then(
       (results) => {
         this.props.dispatch(addMatches(results))
       }

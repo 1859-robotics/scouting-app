@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { addTeams, setTeam } from "../actions/teams.js"
+import { addTeams, setTeam, setTeamNote } from "../actions/teams.js"
 import api from "../services/vexdb.js"
 
 import List from "../components/List.js"
@@ -39,9 +39,9 @@ class TeamList extends Component {
       <div>
       <Link to="/app/matches/">{ "<" } Matches</Link>
         {this.state.teams ? (
-          <List label={["number"]}
+          <List label={["number", "divisons"]}
                 link={["number"]}
-                search={["number"]}
+                search={["number", "divisons"]}
                 list={ this.state.teams }
                 linkURL={ "/app/teams/" } />
         ) : (

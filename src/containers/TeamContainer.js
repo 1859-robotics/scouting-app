@@ -31,6 +31,11 @@ class TeamContainer extends Component {
         this.props.dispatch(setTeamNote(this.state.number, { key: "teamInfo", value: results }))
       }
     )
+    api.getTeamDivisions(this.state.number).then(
+      (results) => {
+        this.props.dispatch(setTeamNote(this.state.number, { key: "divisons", value: results }))
+      }
+    )
   }
 
   static getDerivedStateFromProps(nextProps) {
@@ -38,6 +43,7 @@ class TeamContainer extends Component {
       number: (nextProps.number || nextProps.match.params.number),
       stats: nextProps.stats || {},
       matches: nextProps.matches || [],
+      divisions: nextProps.divisions || [],
       teamInfo: nextProps.teamInfo || {},
       userInputData: {
         note: "",
@@ -64,7 +70,9 @@ class TeamContainer extends Component {
     return (
       <div>
         <Link to="/app/teams/">{ "<" } Teams</Link>
-        <h1>{ this.state.number + " - " + (!this.state.teamInfo ? "" : this.state.teamInfo.team_name) }</h1>
+        <h1>{ this.state.number + " - " +
+              (!this.state.teamInfo ? "" : this.state.teamInfo.team_name) + ", " +
+              (!this.state.divisions ? "" : this.state.divisions.reduce((d, c) => d + c + ", ", "")) }</h1>
         <div>
           <textarea placeholder="notes on team"
             value={ this.state.userInputData.note }
@@ -108,7 +116,6 @@ class TeamContainer extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(ownProps);
   const number = (ownProps.number || ownProps.match.params.number)
   if(state.teams.find((team) => team.number === number)) {
     return {

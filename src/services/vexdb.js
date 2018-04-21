@@ -6,7 +6,6 @@ const settings = {
   sku: "RE-VRC-17-3805", // TODO: make this user controllable
   season: "In The Zone",
   program: "VRC",
-  division: "Technology",
 }
 
 const api = {
@@ -28,7 +27,7 @@ const api = {
         let divisions = matches.reduce((acc, cur, i) => (
           acc.indexOf(cur.division) === -1 ? [...acc, cur.division] : acc
         ), [])
-        resolve(divisions.length === 1 ? divisions[0] : divisions)
+        resolve(divisions)
       })
     });
   }
