@@ -20,8 +20,15 @@ export default class List extends Component {
     let filteredList = this.props.list.filter((item) => {
       let found = false
       for(let i = 0; i < this.props.search.length; i++) {
-        if(item[this.props.search[i]].toString().length !== 0 &&
-           item[this.props.search[i]].toString().toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1) found = true
+        if(item[this.props.search[i]]) {
+          if(item[this.props.search[i]].constructor === String) {
+            if(item[this.props.search[i]].length !== 0 &&
+              item[this.props.search[i]].toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1) found = true
+            } else {
+              if(item[this.props.search[i]].toString().length !== 0 &&
+              item[this.props.search[i]].toString().toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1) found = true
+            }
+        }
       }
       return found
     }, this);
@@ -33,7 +40,7 @@ export default class List extends Component {
       const labels = this.props.label.map((label, j) => (
         <span key={ j }
               style={{ width: "100px" }}>
-          { item[label] }
+          { item[label] || "-" }
         </span>
       ))
       const url = this.props.linkURL + this.props.link.reduce((acc, cur) => acc + item[cur] + "/", "")

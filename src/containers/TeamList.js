@@ -9,7 +9,7 @@ import List from "../components/List.js"
 
 class TeamList extends Component {
   constructor(props, context) {
-    super(props, context)
+    super( props, context )
     this.state = {}
   }
 
@@ -31,7 +31,6 @@ class TeamList extends Component {
     this.props.dispatch(setTeam({
       number: this.newTeamInput.value.toUpperCase()
     }))
-
   }
 
   render() {

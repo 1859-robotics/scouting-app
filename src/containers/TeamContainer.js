@@ -33,7 +33,7 @@ class TeamContainer extends Component {
     )
     api.getTeamDivisions(this.state.number).then(
       (results) => {
-        this.props.dispatch(setTeamNote(this.state.number, { key: "divisons", value: results }))
+        this.props.dispatch(setTeamNote(this.state.number, { key: "divisions", value: results }))
       }
     )
   }
@@ -67,12 +67,13 @@ class TeamContainer extends Component {
   }
 
   render() {
+    window.divisons = this.state.divisions
     return (
       <div>
         <Link to="/app/teams/">{ "<" } Teams</Link>
         <h1>{ this.state.number + " - " +
-              (!this.state.teamInfo ? "" : this.state.teamInfo.team_name) + ", " +
-              (!this.state.divisions ? "" : this.state.divisions.reduce((d, c) => d + c + ", ", "")) }</h1>
+              (!this.state.teamInfo ? "" : this.state.teamInfo.team_name) +
+              (!this.state.divisions ? "" : this.state.divisions.reduce((d, c) => ", " + d + c, "")) }</h1>
         <div>
           <textarea placeholder="notes on team"
             value={ this.state.userInputData.note }
