@@ -7,7 +7,7 @@ import { setTeamNote, addTeam, setTeam } from "../actions/teams.js"
 import api from "../services/vexdb.js"
 
 import DataTable from "../components/DataTable.js"
-import List from "../components/List.js"
+import List from "../components/List/List.js"
 
 class TeamContainer extends Component {
   constructor(props, context) {
@@ -71,9 +71,11 @@ class TeamContainer extends Component {
     return (
       <div>
         <Link to="/app/teams/">{ "<" } Teams</Link>
-        <h1>{ this.state.number + " - " +
-              (!this.state.teamInfo ? "" : this.state.teamInfo.team_name) +
-              (!this.state.divisions ? "" : this.state.divisions.reduce((d, c) => ", " + d + c, "")) }</h1>
+        <Link to={ "/app/teams/" + this.state.number }>
+          <h1>{ this.state.number + " - " +
+                (!this.state.teamInfo ? "" : this.state.teamInfo.team_name) +
+                (!this.state.divisions ? "" : this.state.divisions.reduce((d, c) => ", " + d + c, "")) }</h1>
+        </Link>
         <div>
           <textarea placeholder="notes on team"
             value={ this.state.userInputData.note }

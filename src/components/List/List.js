@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom"
 
-import SearchBar from "./SearchBar"
+import SearchBar from "../SearchBar"
+
+import "./style.css"
 
 export default class List extends Component {
   constructor(props) {

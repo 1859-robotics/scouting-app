@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { addTeams, setTeam, setTeamNote } from "../actions/teams.js"
 import api from "../services/vexdb.js"
 
-import List from "../components/List.js"
+import List from "../components/List/List.js"
 
 class TeamList extends Component {
   constructor(props, context) {

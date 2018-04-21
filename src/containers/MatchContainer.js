@@ -8,7 +8,7 @@ import { setMatch } from "../actions/matches.js"
 
 import DataTable from "../components/DataTable.js"
 import TeamContainer from "./TeamContainer.js"
-import List from "../components/List.js"
+import List from "../components/List/List.js"
 
 const getTeams = (m) => {
   console.log(m);
@@ -37,11 +37,6 @@ class MatchContainer extends Component {
       }
     )
   }
-
-  componentDidUpdate(prevProps, prevState) {
-
-  }
-
 
   static getDerivedStateFromProps(nextProps, prevState) {
     return {

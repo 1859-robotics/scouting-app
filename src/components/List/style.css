@@ -1,0 +1,16 @@
+ul {
+  list-style: none;
+}
+
+ul li {
+  margin-bottom: 4px;
+}
+
+ul li a {
+  padding: 4px 8px;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+ul li a:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}

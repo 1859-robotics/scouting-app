@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { addMatches, setMatch } from "../actions/matches.js"
 import api from "../services/vexdb.js"
 
-import List from "../components/List.js"
+import List from "../components/List/List.js"
 
 class MatchList extends Component {
   constructor(props, context) {
