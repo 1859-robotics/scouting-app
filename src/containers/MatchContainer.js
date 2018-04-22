@@ -30,21 +30,23 @@ class MatchContainer extends Component {
   }
 
   componentDidMount() {
-    api.getMatches({division: this.state.division, matchnum: this.state.matchnum, round: this.state.round}).then(
-      (results) => {
-        this.props.dispatch(setMatch(results))
-        this.setState({ teams: getTeams(results) })
-      }
-    )
+
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    if(nextProps !== prevState) {
+      api.getMatches({division: nextProps.division, matchnum: nextProps.matchnum, round: nextProps.round}).then(
+        (results) => {
+          nextProps.dispatch(setMatch(results))
+        }
+      )
+    }
     return {
-      match: nextProps.matchData || {},
+      matchData: nextProps.matchData || {},
       division: nextProps.division,
       matchnum: nextProps.matchnum,
       round: nextProps.round,
-      teams: prevState.teams || []
+      teams: prevState.teams || getTeams(nextProps.matchData) || []
     }
   }
 

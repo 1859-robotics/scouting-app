@@ -10,3 +10,9 @@ table, td, tr, thead, tbody, th {
 td, th {
   padding: 2px 4px;
 }
+
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

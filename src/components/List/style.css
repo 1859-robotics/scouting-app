@@ -8,7 +8,7 @@ ul li {
 
 ul li a {
   padding: 4px 8px;
-  color: rgba(0, 0, 0, 0.85);
+  /* color: rgba(0, 0, 0, 0.85); */
 }
 
 ul li a:hover {

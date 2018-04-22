@@ -38,10 +38,10 @@ class TeamList extends Component {
       <div>
       <Link to="/app/matches/">{ "<" } Matches</Link>
         {this.state.teams ? (
-          <List label={["number", "divisons"]}
+          <List label={["number", "divisions"]}
                 link={["number"]}
-                search={["number", "divisons"]}
-                list={ this.state.teams }
+                search={["number", "divisions"]}
+                list={ this.state.teams.map((team) => ({ number: team.number, divisions: team.divisions ? team.divisions.join(", ") : "" })) }
                 linkURL={ "/app/teams/" } />
         ) : (
           <div>
@@ -50,7 +50,7 @@ class TeamList extends Component {
         )}
         <button onClick={ this.addNewTeam.bind(this) }>add team</button>
         <input type="text"
-               ref={ newTeamInput => this.newTeamInput = newTeamInput}/>
+               ref={ newTeamInput => this.newTeamInput = newTeamInput }/>
       </div>
     );
   }

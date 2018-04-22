@@ -67,7 +67,6 @@ class TeamContainer extends Component {
   }
 
   render() {
-    window.divisons = this.state.divisions
     return (
       <div>
         <Link to="/app/teams/">{ "<" } Teams</Link>
