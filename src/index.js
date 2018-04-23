@@ -6,7 +6,7 @@ import { createStore } from 'redux'
 import App from './containers/App.js'
 import registerServiceWorker from './registerServiceWorker'
 
-import scoutingApp from './reducers'
+import scoutingApp from './reducers/index.js'
 
 // TODO: make an actual style system or something idk
 import "./style/style.css"
@@ -23,11 +23,16 @@ try {
 
 const store = createStore(scoutingApp, persist || {})
 
+console.log(store);
+
 store.subscribe(() => {
   localStorage.setItem('state', JSON.stringify(store.getState()));
 })
 
+export { store }
+
 window.erots = store
+
 
 ReactDOM.render(
   <Provider store={ store }>

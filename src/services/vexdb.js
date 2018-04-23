@@ -1,6 +1,12 @@
+<<<<<<< current
 import vexdb from "vexdb"
 
+import * as store from "../index.js" // TODO: make this not shit and learn more about imports and exports in js because you are bad
+
+console.log(store.store);
+
 window.bdxev = require("vexdb");
+
 
 const settings = {
   sku: "RE-VRC-17-3805", // TODO: make this user controllable
@@ -10,16 +16,16 @@ const settings = {
 
 const api = {
   getMatches: (options) => {
-    return vexdb.get("matches", { ...settings, ...options })
+    return vexdb.get("matches", { ...store.store.getState().settings, ...options })
   },
   getStats: (team) => {
-    return vexdb.get("rankings", { ...settings, team })
+    return vexdb.get("rankings", { ...store.store.getState().settings, team })
   },
   getTeam: (team) => {
     return vexdb.get("teams", { team })
   },
   getTeams: () => {
-    return vexdb.get("teams", { ...settings })
+    return vexdb.get("teams", { ...store.store.getState().settings })
   },
   getTeamDivisions: (team, options = {}) => {
     return new Promise((resolve, reject) => {
@@ -36,3 +42,26 @@ const api = {
 window.ipa = api
 
 export default api
+=======
+import vexdb from "vexdb"
+
+const settings = {
+  event: "RE-VRC-17-2559", // TODO: make this user controllable
+}
+
+const api = {
+  getMatches: (team) => {
+    return vexdb.getAll("matches", {program: "VRC", season: "In The Zone", sku: settings.event, team})
+  },
+  getStats: (team) => {
+    return vexdb.getAll("rankings", {program: "VRC", season: "In The Zone", sku: settings.event, team})
+  },
+  getTeam: (team) => {
+    return vexdb.getAll("teams", {program: "VRC", season: "In The Zone", team})
+  },
+}
+
+window.ipa = api
+
+export default api
+>>>>>>> before discard
