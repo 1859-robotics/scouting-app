@@ -10,7 +10,8 @@ export default function settings(state = defaultSettings, action) {
   if(action.type === SET_SETTING) {
     return { ...state, ...action.payload }
   } else if(action.type === SET_SETTINGS) {
-    return { ...action.payload }
+    console.log({ ...action.payload.settings });
+    return { ...action.payload.settings }
   } else {
     return state
   }

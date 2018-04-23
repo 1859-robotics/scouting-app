@@ -19,7 +19,9 @@ class Settings extends Component {
   }
 
   setSetting(e, setting) {
-    this.setState({ setting: e.target.value })
+    const settings = { ...this.state.settings }
+    settings[setting] = e.target.value
+    this.setState({ settings })
   }
 
   saveSettings(e) {
