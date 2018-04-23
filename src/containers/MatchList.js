@@ -48,7 +48,6 @@ class MatchList extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
   return {
     matches: state.matches
   }

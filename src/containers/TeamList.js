@@ -38,10 +38,17 @@ class TeamList extends Component {
       <div>
       <Link to="/app/matches/">{ "<" } Matches</Link>
         {this.state.teams ? (
-          <List label={["number", "divisions"]}
+          <List label={["number", "name", "divisions", "auton", "autonPoints"]}
                 link={["number"]}
-                search={["number", "divisions"]}
-                list={ this.state.teams.map((team) => ({ number: team.number, divisions: team.divisions ? team.divisions.join(", ") : "" })) }
+                search={["number", "name", "divisions", "auton", "autonPoints"]}
+                list={ this.state.teams.map((team) => ({
+                  number: team.number,
+                  name: (team.teamInfo != null ? team.teamInfo.team_name : undefined),
+                  divisions: (team.divisions != null ? team.divisions.join(", ") : undefined),
+                  auton: (team.userInputData != null ? team.userInputData.autonWorks ? "works" : "doesn't" : undefined),
+                  autonPoints: (team.userInputData != null ? team.userInputData.autonPoints : undefined)
+
+                })) }
                 linkURL={ "/app/teams/" } />
         ) : (
           <div>
