@@ -1,9 +1,6 @@
-<<<<<<< current
 import vexdb from "vexdb"
 
 import * as store from "../index.js" // TODO: make this not shit and learn more about imports and exports in js because you are bad
-
-console.log(store.store);
 
 window.bdxev = require("vexdb");
 
@@ -39,29 +36,6 @@ const api = {
   }
 }
 
-window.ipa = api
-
 export default api
-=======
-import vexdb from "vexdb"
-
-const settings = {
-  event: "RE-VRC-17-2559", // TODO: make this user controllable
-}
-
-const api = {
-  getMatches: (team) => {
-    return vexdb.getAll("matches", {program: "VRC", season: "In The Zone", sku: settings.event, team})
-  },
-  getStats: (team) => {
-    return vexdb.getAll("rankings", {program: "VRC", season: "In The Zone", sku: settings.event, team})
-  },
-  getTeam: (team) => {
-    return vexdb.getAll("teams", {program: "VRC", season: "In The Zone", team})
-  },
-}
 
 window.ipa = api
-
-export default api
->>>>>>> before discard

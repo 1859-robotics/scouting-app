@@ -3,11 +3,8 @@ import { Link } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 
-import { setTeamNote, addTeam, setTeam } from "../actions/teams.js"
+import { setSettings } from "../actions/settings.js"
 import api from "../services/vexdb.js"
-
-import DataTable from "../components/DataTable.js"
-import List from "../components/List/List.js"
 
 class Settings extends Component {
   constructor(props, context) {
@@ -17,23 +14,39 @@ class Settings extends Component {
 
   static getDerivedStateFromProps(nextProps) {
     return {
-      
+      settings: nextProps.settings
     }
   }
 
+  setSetting(e, setting) {
+    this.setState({ setting: e.target.value })
+  }
+
+  saveSettings(e) {
+    this.props.dispatch(setSettings({ ...this.state.settings }))
+  }
+
   render() {
+    const inputs = Object.keys(this.state.settings).map((key, i) => (
+      <div key={ i }>
+        <p>{ key }: </p>
+        <input type="text" defaultValue={ this.state.settings[key] }
+               onChange={ e => this.setSetting(e, key) }/>
+      </div>
+    ))
     return (
       <div>
         <Link to="/app/teams/">{ "<" } Teams</Link>
         <h1>Settings</h1>
-
+        { inputs }
+        <button onClick={ this.saveSettings.bind(this) }>Save Settings</button>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return {}
+  return state
 }
 
 export default connect(mapStateToProps)(Settings)
