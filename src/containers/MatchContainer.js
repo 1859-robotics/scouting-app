@@ -11,8 +11,8 @@ import TeamContainer from "./TeamContainer.js"
 import List from "../components/List/List.js"
 
 const getTeams = (m) => {
-  console.log(m);
   const result = []
+  // TODO: find some way to not make this shit
   m.blue1 && result.push(m.blue1)
   m.red1  && result.push(m.red1)
   m.blue2 && result.push(m.blue2)
@@ -51,8 +51,6 @@ class MatchContainer extends Component {
   }
 
   render() {
-    console.log(this.state.teams);
-
     const teamContainers = this.state.teams.map((team, i) => {
       return (
         <div style={{ marginBottom: "64px", borderBottom: "1px solid" }}>

@@ -8,6 +8,8 @@ import registerServiceWorker from './registerServiceWorker'
 
 import scoutingApp from './reducers/index.js'
 
+import { cache } from "vexdb"
+
 // TODO: make an actual style system or something idk
 import "./style/style.css"
 
@@ -23,13 +25,12 @@ try {
 
 const store = createStore(scoutingApp, persist || {})
 
-console.log(store);
-
 store.subscribe(() => {
-  localStorage.setItem('state', JSON.stringify(store.getState()));
+  localStorage.setItem('state', JSON.stringify(store.getState()))
+  cache.clear() // TODO: put in an issue for high volume cache read/write and an option to not use it
 })
 
-export { store }
+export { store } // TODO: Learn more about exports in js
 
 window.erots = store
 

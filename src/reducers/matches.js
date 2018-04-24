@@ -28,7 +28,7 @@ export default function matches(state = [], action) {
     if(state.length !== 0) {
       return [
         ...state,
-        ...action.payload.matches.filter(match => !state.find(amatch => match.matchnum === amatch.matchnum))
+        ...action.payload.matches.filter(match => !state.find(amatch => match.matchnum === amatch.matchnum && match.division === amatch.division))
       ]
     } else return [ ...action.payload.matches ]
 
