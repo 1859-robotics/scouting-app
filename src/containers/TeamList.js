@@ -33,10 +33,20 @@ class TeamList extends Component {
     }))
   }
 
+  getTeamDivisions(e) {
+    this.state.teams.forEach((team) => {
+      api.getTeamDivisions(team.number).then((divisions) => {
+        this.props.dispatch(setTeamNote(team.number, { key: "divisions", value: divisions }))
+      })
+    })
+  }
+
   render() {
     return (
       <div>
-      <Link to="/app/matches/">{ "<" } Matches</Link>
+
+        <Link to="/app/matches/">{ "<" } Matches</Link>
+        <button onClick={ this.getTeamDivisions.bind(this) }>Get Team Divisions</button>
         {this.state.teams ? (
           <List label={["number", "divisions"]}
                 link={["number"]}
