@@ -1,6 +1,9 @@
 import vexdb from "vexdb"
 
+import * as store from "../index.js" // TODO: make this not shit and learn more about imports and exports in js because you are bad
+
 window.bdxev = require("vexdb");
+
 
 const settings = {
   sku: "RE-VRC-17-3805", // TODO: make this user controllable
@@ -10,16 +13,16 @@ const settings = {
 
 const api = {
   getMatches: (options) => {
-    return vexdb.get("matches", { ...settings, ...options })
+    return vexdb.get("matches", { ...store.store.getState().settings, ...options })
   },
   getStats: (team) => {
-    return vexdb.get("rankings", { ...settings, team })
+    return vexdb.get("rankings", { ...store.store.getState().settings, team })
   },
   getTeam: (team) => {
     return vexdb.get("teams", { team })
   },
   getTeams: () => {
-    return vexdb.get("teams", { ...settings })
+    return vexdb.get("teams", { ...store.store.getState().settings })
   },
   getTeamDivisions: (team, options = {}) => {
     return new Promise((resolve, reject) => {
@@ -33,6 +36,6 @@ const api = {
   }
 }
 
-window.ipa = api
-
 export default api
+
+window.ipa = api

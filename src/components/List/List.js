@@ -41,8 +41,8 @@ export default class List extends Component {
     const listItems = this.state.filteredList.map((item, i) => {
       const labels = this.props.label.map((label, j) => (
         <span key={ j }
-              style={{ width: "100px" }}>
-          { item[label] || "-" }
+              style={{ width: "200px" }}>
+          { item[label] != undefined ? item[label] : "-" }
         </span>
       ))
       const url = this.props.linkURL + this.props.link.reduce((acc, cur) => acc + item[cur] + "/", "")
@@ -57,7 +57,7 @@ export default class List extends Component {
     })
     const headLabels = this.props.label.map((label, i) => (
       <span key={ i }
-            style={{ width: "100px", display: "inline-block" }}>
+            style={{ width: "200px", display: "inline-block" }}>
         { label }
       </span>
     ))
