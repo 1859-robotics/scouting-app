@@ -94,7 +94,8 @@ class TeamContainer extends Component {
           </div>
           <button onClick={ this.saveData.bind(this) }>Save Data</button>
         </div>
-        { !!this.state.matches.length && (
+        <hr/>
+        { !!this.state.matches.length ? (
           <div>
             <h2>Matches</h2>
 
@@ -104,13 +105,14 @@ class TeamContainer extends Component {
               list={ this.state.matches }
               linkURL={ "/app/matches/" } />
             </div>
-        ) }
-        { !!Object.keys(this.state.stats).length && (
+        ) : <p>getting matches...</p> }
+        <hr/>
+        { !!Object.keys(this.state.stats).length ? (
           <div>
             <h2>Current Standings</h2>
             <DataTable data={ this.state.stats }/>
           </div>
-        ) }
+        ) : <p>getting current standings...</p> }
 
       </div>
     );

@@ -14,7 +14,7 @@ class MatchList extends Component {
   }
 
   componentDidMount() {
-    api.getMatches({ division: "Technology" }).then(
+    api.getMatches({ division: this.state.division }).then(
       (results) => {
         this.props.dispatch(addMatches(results))
       }
@@ -23,7 +23,8 @@ class MatchList extends Component {
 
   static getDerivedStateFromProps(nextProps) {
     return {
-      matches: nextProps.matches
+      matches: nextProps.matches,
+      division: nextProps.division
     }
   }
 
@@ -49,7 +50,8 @@ class MatchList extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    matches: state.matches
+    matches: state.matches,
+    division: state.settings.division,
   }
 }
 
