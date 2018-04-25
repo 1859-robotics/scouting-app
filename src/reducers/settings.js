@@ -4,8 +4,7 @@ const defaultSettings = {
   sku: "RE-VRC-17-3805", // TODO: make this user controllable
   season: "In The Zone",
   program: "VRC",
-  divisions: "Technology",
-  userTeam: "1859X",
+  division: "Technology"
 }
 
 export default function settings(state = defaultSettings, action) {

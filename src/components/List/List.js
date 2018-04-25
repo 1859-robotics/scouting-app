@@ -65,7 +65,7 @@ export default class List extends Component {
       <div>
         <SearchBar onChange={ (e) => this.filterList(e) }/>
         <ul>
-          <li style={{ display: "flex" }}>
+          <li style={{ display: "inline-flex" }}>
             { headLabels }
           </li>
           { listItems }
