@@ -11,7 +11,7 @@ const { globalOptions } = require("./configure");
  * @param  {Object} params   Any URL parameters to specify, in Object form. See the relevant API docs page for more info
  * @return {Promise}
  */
-function request(endpoint, args, doCache = true) {
+function request(endpoint, args, doCache = false) {
 
     // Validate endpoint against known, to avoid unneeded requests
     let known = [

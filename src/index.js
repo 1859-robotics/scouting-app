@@ -8,7 +8,7 @@ import registerServiceWorker from './registerServiceWorker'
 
 import scoutingApp from './reducers/index.js'
 
-import { cache } from "vexdb"
+import { cache } from "./services/vexdb/main.js"
 
 // TODO: make an actual style system or something idk
 import "./style/style.css"

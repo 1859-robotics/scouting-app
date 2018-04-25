@@ -1,8 +1,8 @@
-import vexdb from "vexdb"
+import vexdb from "./vexdb/main.js"
 
 import * as store from "../index.js" // TODO: make this not shit and learn more about imports and exports in js because you are bad
 
-window.bdxev = require("vexdb");
+// window.bdxev = require("vexdb");
 
 
 const settings = {

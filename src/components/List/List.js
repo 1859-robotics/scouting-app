@@ -49,7 +49,7 @@ export default class List extends Component {
       return (
         <li key={ i }>
           <Link to={ url }
-                style={{ display: "flex" }}>
+                style={{ display: "inline-flex" }}>
             { labels }
           </Link>
         </li>

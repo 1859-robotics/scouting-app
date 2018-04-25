@@ -1,4 +1,6 @@
 const { get, size } = require("./request");
+const EventEmitter = require("events");
+
 
 /**
  * Gets events whose dates intersect with the current date
@@ -64,13 +66,13 @@ function duplicateManager(inital) {
 function watchEvent(sku, { matches, roster }) {
 
     const emitter = new EventEmitter();
-    meta = {
+    const meta = {
         match: {},
         roster: {},
         skills: {}
     }; // Holds intermediate and meta data
 
-    // Async setup, so we can return immediately 
+    // Async setup, so we can return immediately
     setTimeout(async () => {
 
 
@@ -79,14 +81,14 @@ function watchEvent(sku, { matches, roster }) {
             meta.match = {
                 size: -1,
                 loop: 0,
-                list: duplicateManager(await vexdb.get("matches", { sku, "scored": 1 }))
+                list: duplicateManager(await get("matches", { sku, "scored": 1 }))
             }
 
             meta.match.loop = setInterval(async () => {
-                let size = await vexdb.size("matches", { sku, "scored": 1 });
+                let size = await size("matches", { sku, "scored": 1 });
                 if (meta.match.size > 0) { // Skip the first size evaluation
                     if (size != meta.match.size) {
-                        meta.match.list.step(await vexdb.get("matches", { sku, "scored": 1 }))
+                        meta.match.list.step(await get("matches", { sku, "scored": 1 }))
                             .forEach(match => {
                                 emitter.emit("match", match);
                             });
@@ -98,15 +100,15 @@ function watchEvent(sku, { matches, roster }) {
 
         if (roster) {
             meta.roster = {
-                size: await vexdb.size("teams", { sku }),
+                size: await size("teams", { sku }),
                 loop: 0
             }
 
             meta.roster.loop = setInterval(async () => {
-                let size = await vexdb.size("teams", { sku, "scored": 1 });
+                let size = await size("teams", { sku, "scored": 1 });
                 if (meta.roster.size > 0) { // Skip the first size evaluation
                     if (size != meta.roster.size) {
-                        emitter.emit("rosterUpdate", await vexdb.get("teams", { sku }));
+                        emitter.emit("rosterUpdate", await get("teams", { sku }));
                     }
                 }
                 meta.roster.size = size;
@@ -130,7 +132,7 @@ function watchEvent(sku, { matches, roster }) {
 }
 
 
-module.exports = {
+export {
     getCurrentEvents,
     watchEvent
 }
