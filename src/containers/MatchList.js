@@ -14,7 +14,7 @@ class MatchList extends Component {
   }
 
   componentDidMount() {
-    api.getMatches({ division: this.state.division }).then(
+    api.getMatches({ division: this.state.divisions }).then(
       (results) => {
         this.props.dispatch(addMatches(results))
       }
@@ -51,7 +51,7 @@ class MatchList extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     matches: state.matches,
-    division: state.settings.division,
+    division: state.settings.divisions,
   }
 }
 
