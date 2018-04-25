@@ -17,7 +17,6 @@ export default class DataTable extends Component {
       data: props.data,
       yLabels,
       xLabels,
-
     }
   }
 
@@ -38,7 +37,9 @@ export default class DataTable extends Component {
       tBody = []
       Object.keys(this.state.data).forEach((item, i) => {
         if(!(this.state.data[item].constructor === Array)) {
-          tBody.push(<td key={ tBody.length }>{ this.state.data[item] || "" }</td>)
+          tBody.push(
+            <td key={ tBody.length }>{ this.state.data[item] || "" }</td>
+          )
         } else {
           tBody.push(
             <tr key={ i }>
@@ -71,5 +72,4 @@ export default class DataTable extends Component {
       </table>
     )
   }
-
 }

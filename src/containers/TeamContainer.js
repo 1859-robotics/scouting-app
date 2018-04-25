@@ -120,6 +120,7 @@ class TeamContainer extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  console.log(state);
   const number = (ownProps.number || ownProps.match.params.number)
   if(state.teams.find((team) => team.number === number)) {
     return {
