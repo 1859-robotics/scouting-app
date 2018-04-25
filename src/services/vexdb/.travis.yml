@@ -1,0 +1,18 @@
+language: node_js
+sudo: false
+nodejs: node
+
+install:
+  - yarn -D
+  - yarn
+  - yarn global add ava
+
+script:
+  yarn test
+
+deploy:
+  provider: npm
+  email: articialchamber@gmail.com
+  api_key: $NPM_TOKEN
+  on:
+    tags: true

@@ -1,0 +1,64 @@
+{
+  "_from": "vexdb@0.7.2",
+  "_id": "vexdb@0.7.2",
+  "_inBundle": false,
+  "_integrity": "sha512-DrD9B8WW15IAMP9uu/3uSZgmHcP3//e9NvhANbjr4v8vo/TDWlrhtx3b5IDurLnLgj7Ny5Nj9vJtfgCrXQeWmw==",
+  "_location": "/vexdb",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "vexdb@0.7.2",
+    "name": "vexdb",
+    "escapedName": "vexdb",
+    "rawSpec": "0.7.2",
+    "saveSpec": null,
+    "fetchSpec": "0.7.2"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/vexdb/-/vexdb-0.7.2.tgz",
+  "_shasum": "661495e7115da92de4d0ce6ce482264b969b6b01",
+  "_spec": "vexdb@0.7.2",
+  "_where": "C:\\Users\\Alexander\\Documents\\github\\scouting-app",
+  "author": {
+    "name": "Brendan McGuire"
+  },
+  "bugs": {
+    "url": "https://github.com/MayorMonty/vexdb/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "axios": "^0.15.3"
+  },
+  "deprecated": false,
+  "description": "A simple tool for accessing the VexDB",
+  "devDependencies": {
+    "ava": "^0.18.2",
+    "codecov": "^2.1.0",
+    "nyc": "^10.2.0"
+  },
+  "homepage": "https://github.com/MayorMonty/vexdb#readme",
+  "keywords": [
+    "vexdb",
+    "vrc",
+    "vex",
+    "robotics",
+    "database",
+    "rest",
+    "api"
+  ],
+  "license": "MIT",
+  "main": "main.js",
+  "name": "vexdb",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MayorMonty/vexdb.git"
+  },
+  "scripts": {
+    "test": "nyc ava && nyc report --reporter=text-lcov > coverage.lcov && codecov"
+  },
+  "version": "0.7.2"
+}
