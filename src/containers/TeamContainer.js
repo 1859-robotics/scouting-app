@@ -68,7 +68,7 @@ class TeamContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div style={ this.props.style }>
         <Link to="/app/teams/">{ "<" } Teams</Link>
         <Link to={ "/app/teams/" + this.state.number }>
           <h1>{ this.state.number + " - " +
@@ -120,7 +120,6 @@ class TeamContainer extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
   const number = (ownProps.number || ownProps.match.params.number)
   if(state.teams.find((team) => team.number === number)) {
     return {

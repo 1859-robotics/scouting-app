@@ -1,15 +1,11 @@
 import vexdb from "./vexdb/main.js"
 
 import * as store from "../index.js" // TODO: make this not shit and learn more about imports and exports in js because you are bad
+import { setTeamNote } from "../actions/teams.js"
+
 
 // window.bdxev = require("vexdb");
 
-
-const settings = {
-  sku: "RE-VRC-17-3805", // TODO: make this user controllable
-  season: "In The Zone",
-  program: "VRC",
-}
 
 const api = {
   getMatches: (options) => {
@@ -27,6 +23,7 @@ const api = {
   getTeamDivisions: (team, options = {}) => {
     return new Promise((resolve, reject) => {
       api.getMatches({ team, ...options }).then((matches) => {
+        store.store.dispatch(setTeamNote(team, { key: "matches", value: matches }))
         let divisions = matches.reduce((acc, cur, i) => (
           acc.indexOf(cur.division) === -1 ? [...acc, cur.division] : acc
         ), [])

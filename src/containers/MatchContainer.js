@@ -13,12 +13,14 @@ import List from "../components/List/List.js"
 const getTeams = (m) => {
   const result = []
   // TODO: find some way to not make this shit
-  m.blue1 && result.push(m.blue1)
-  m.red1  && result.push(m.red1)
-  m.blue2 && result.push(m.blue2)
-  m.red2  && result.push(m.red2)
-  m.blue3 && result.push(m.blue3)
-  m.red3  && result.push(m.red3)
+  if(m) {
+    m.blue1 && result.push(m.blue1)
+    m.red1  && result.push(m.red1)
+    m.blue2 && result.push(m.blue2)
+    m.red2  && result.push(m.red2)
+    m.blue3 && result.push(m.blue3)
+    m.red3  && result.push(m.red3)
+  }
 
   return result
 }
@@ -27,10 +29,6 @@ class MatchContainer extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = {}
-  }
-
-  componentDidMount() {
-
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -53,7 +51,7 @@ class MatchContainer extends Component {
   render() {
     const teamContainers = this.state.teams.map((team, i) => {
       return (
-        <div style={{ marginBottom: "64px", borderBottom: "1px solid" }}>
+        <div style={{ width: "calc(50% - 8px)", height: "50vh", float: "left", overflow: "scroll", margin: "4px"}}>
 
           <TeamContainer number={ team }  key={ i }/>
         </div>
